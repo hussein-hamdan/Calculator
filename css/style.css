@@ -1,85 +1,83 @@
 body {
-  margin: 0;
-  height: 100vh;
+  background-color: #1a1a1a;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #1e1e1e;
-  font-family: Arial;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
 .calculator {
-  width: 320px;
-  background: #2b2b2b;
-  border-radius: 12px;
-  padding: 10px;
-  transition: 0.3s;
+  background-color: #000;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .display {
-  height: 60px;
-  background: #111;
+  background: #000;
   color: white;
-  font-size: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  text-align: right;
+  padding: 20px;
+  font-size: 2rem;
+  word-wrap: break-word;
+  min-height: 80px;
 }
 
-/* زر التبديل */
-.toggle {
-  margin-bottom: 10px;
-  padding: 8px;
-  width: 100%;
-  background: #444;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.buttons {
+.buttons-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  gap: 2px;
 }
 
 button {
-  padding: 16px;
-  font-size: 16px;
+  height: 50px;
   border: none;
-  border-radius: 8px;
-  background: #3a3a3a;
+  background-color: #1c1c1c;
   color: white;
+  font-size: 1.1rem;
   cursor: pointer;
+  transition: 0.2s;
 }
 
-/* العمليات */
-.operator {
-  background: #5050ff;
-}
-.equal {
-  background: orange;
+button:hover {
+  background-color: #333;
 }
 
-/* الأزرار العلمية */
-.scientific {
+.btn-num {
+  background-color: #060606;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+.btn-op {
+  background-color: #1c1c1c;
+}
+.btn-equals {
+  background-color: #4cc2ff;
+  color: black;
+}
+
+.span-two {
+  grid-column: span 4;
+  background-color: #252525;
+  margin-bottom: 10px;
+}
+
+/* إخفاء الأزرار العلمية افتراضياً */
+.scientific-keys {
   display: none;
+  grid-column: span 4;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
 }
 
-/* عند التفعيل */
+/* عندما تكون الآلة في الوضع العلمي */
+.calculator.scientific-mode .scientific-keys {
+  display: grid;
+}
+
 .calculator.scientific-mode {
-  width: 420px;
-}
-
-.calculator.scientific-mode .buttons {
-  grid-template-columns: repeat(6, 1fr);
-}
-
-/* إظهار العلمي */
-.calculator.scientific-mode .scientific {
-  display: block;
+  width: 450px; /* توسيع الآلة قليلاً في الوضع العلمي */
 }

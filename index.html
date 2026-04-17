@@ -15,55 +15,56 @@
 
   <body>
     <div class="calculator" id="calc">
-      <button class="toggle" onclick="toggleMode()">Scientific Mode</button>
+      <div class="display">
+        <div id="previous-operand"></div>
+        <div id="current-operand">0</div>
+      </div>
 
-      <div class="display">0</div>
+      <div class="buttons-grid">
+        <button onclick="toggleScientific()" class="span-two mode-btn">
+          Scientific
+        </button>
+        <div class="scientific-keys">
+          <button data-func="pow2">x²</button>
+          <button data-func="powY">xʸ</button>
+          <button data-func="sin">sin</button>
+          <button data-func="cos">cos</button>
+          <button data-func="tan">tan</button>
+          <button data-func="sqrt">√</button>
+          <button data-func="log10">10ˣ</button>
+          <button data-func="log">log</button>
+          <button data-func="exp">Exp</button>
+          <button data-func="mod">Mod</button>
+          <button data-func="pi">π</button>
+          <button data-func="fact">n!</button>
+        </div>
 
-      <div class="buttons">
-        <!-- Scientific -->
-        <button class="scientific">sin</button>
-        <button class="scientific">cos</button>
-        <button class="scientific">tan</button>
-        <button class="scientific">log</button>
-        <button class="scientific">ln</button>
-        <button class="scientific">π</button>
+        <button class="btn-gray" onclick="clearDisplay()">CE</button>
+        <button class="btn-gray" onclick="allClear()">C</button>
+        <button class="btn-gray" onclick="deleteNumber()">⌫</button>
+        <button class="btn-op" onclick="chooseOperation('÷')">÷</button>
 
-        <button class="scientific">x²</button>
-        <button class="scientific">x³</button>
-        <button class="scientific">√</button>
-        <button class="scientific">∛</button>
-        <button class="scientific">xʸ</button>
-        <button class="scientific">( )</button>
+        <button class="btn-num" onclick="appendNumber('7')">7</button>
+        <button class="btn-num" onclick="appendNumber('8')">8</button>
+        <button class="btn-num" onclick="appendNumber('9')">9</button>
+        <button class="btn-op" onclick="chooseOperation('×')">×</button>
 
-        <!-- Standard -->
-        <button>%</button>
-        <button>CE</button>
-        <button>C</button>
-        <button>⌫</button>
-        <button class="operator">÷</button>
+        <button class="btn-num" onclick="appendNumber('4')">4</button>
+        <button class="btn-num" onclick="appendNumber('5')">5</button>
+        <button class="btn-num" onclick="appendNumber('6')">6</button>
+        <button class="btn-op" onclick="chooseOperation('-')">-</button>
 
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button class="operator">×</button>
+        <button class="btn-num" onclick="appendNumber('1')">1</button>
+        <button class="btn-num" onclick="appendNumber('2')">2</button>
+        <button class="btn-num" onclick="appendNumber('3')">3</button>
+        <button class="btn-op" onclick="chooseOperation('+')">+</button>
 
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button class="operator">−</button>
-
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button class="operator">+</button>
-
-        <button>±</button>
-        <button>0</button>
-        <button>.</button>
-        <button class="equal">=</button>
+        <button class="btn-num" onclick="toggleSign()">±</button>
+        <button class="btn-num" onclick="appendNumber('0')">0</button>
+        <button class="btn-num" onclick="appendNumber('.')">.</button>
+        <button class="btn-equals" onclick="compute()">=</button>
       </div>
     </div>
-
     <script src="./js/main.js"></script>
   </body>
 </html>
