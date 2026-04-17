@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1e1e1e;
+  font-family: Arial;
+}
+
+.calculator {
+  width: 320px;
+  background: #2b2b2b;
+  border-radius: 12px;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.display {
+  height: 60px;
+  background: #111;
+  color: white;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* زر التبديل */
+.toggle {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+  background: #444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+button {
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: #3a3a3a;
+  color: white;
+  cursor: pointer;
+}
+
+/* العمليات */
+.operator {
+  background: #5050ff;
+}
+.equal {
+  background: orange;
+}
+
+/* الأزرار العلمية */
+.scientific {
+  display: none;
+}
+
+/* عند التفعيل */
+.calculator.scientific-mode {
+  width: 420px;
+}
+
+.calculator.scientific-mode .buttons {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* إظهار العلمي */
+.calculator.scientific-mode .scientific {
+  display: block;
+}
