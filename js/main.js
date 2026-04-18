@@ -22,30 +22,31 @@ function appendNumber(number) {
 }
 
 function chooseOperation(op) {
-  // استبدال الرموز لتعمل برمجياً (× تصبح * و ÷ تصبح /)
-  let visualOp = op;
   let logicOp = op === "×" ? "*" : op === "÷" ? "/" : op;
+  const operators = ["+", "-", "*", "/"];
 
   if (currentOperand === "" && fullExpression === "") return;
 
-  if (fullExpression === "" && currentOperand !== "") {
+  if (
+    fullExpression !== "" &&
+    operators.includes(fullExpression.slice(-1)) &&
+    currentOperand === ""
+  ) {
+    fullExpression = fullExpression.slice(0, -1) + logicOp;
+  } else if (fullExpression === "" && currentOperand !== "") {
     fullExpression = currentOperand + logicOp;
   } else {
     fullExpression += currentOperand + logicOp;
   }
-
   currentOperand = "";
   updateDisplay();
 }
 
 function compute() {
   if (currentOperand === "" && fullExpression === "") return;
-
   let finalExpression = fullExpression + currentOperand;
-
   try {
     let result = new Function("return " + finalExpression)();
-
     currentOperand = result.toString();
     fullExpression = "";
     operation = undefined;
@@ -76,6 +77,16 @@ function deleteNumber() {
   updateDisplay();
 }
 
+function clearDisplay() {
+  currentOperand = "0";
+  updateDisplay();
+}
+
+function toggleSign() {
+  currentOperand *= -1;
+  updateDisplay();
+}
+
 // إضافة مراقب أحداث للوحة المفاتيح
 document.addEventListener("keydown", function (event) {
   const key = event.key;
@@ -83,7 +94,6 @@ document.addEventListener("keydown", function (event) {
   if ((key >= "0" && key <= "9") || key === ".") {
     appendNumber(key);
   }
-
   if (key === "+" || key === "-") {
     chooseOperation(key);
   }
@@ -106,5 +116,11 @@ document.addEventListener("keydown", function (event) {
   }
   if (key === "Escape") {
     allClear();
+  }
+  if (key === "(") {
+    appendNumber(key);
+  }
+  if (key === ")") {
+    appendNumber(key);
   }
 });
