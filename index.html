@@ -25,22 +25,21 @@
           Scientific
         </button>
         <div class="scientific-keys">
-          <button data-func="pow2">x²</button>
-          <button data-func="powY">xʸ</button>
-          <button data-func="sin">sin</button>
-          <button data-func="cos">cos</button>
-          <button data-func="tan">tan</button>
-          <button data-func="sqrt">√</button>
-          <button data-func="log10">10ˣ</button>
-          <button data-func="log">log</button>
-          <button data-func="exp">Exp</button>
-          <button data-func="mod">Mod</button>
-          <button data-func="pi">π</button>
-          <button data-func="fact">n!</button>
-          <button data-func="open">(</button>
-          <button data-func="close">)</button>
+          <button onclick="scientificCommand('pow2')">x²</button>
+          <button onclick="chooseOperation('**')">xʸ</button>
+          <button onclick="scientificCommand('sin')">sin</button>
+          <button onclick="scientificCommand('cos')">cos</button>
+          <button onclick="scientificCommand('tan')">tan</button>
+          <button onclick="scientificCommand('sqrt')">√</button>
+          <button onclick="scientificCommand('log10')">10ˣ</button>
+          <button onclick="scientificCommand('log')">log</button>
+          <button onclick="scientificCommand('exp')">Exp</button>
+          <button onclick="chooseOperation('%')">Mod</button>
+          <button onclick="scientificCommand('pi')">π</button>
+          <button onclick="scientificCommand('fact')">n!</button>
+          <button onclick="appendNumber('(')">(</button>
+          <button onclick="appendNumber(')')">)</button>
         </div>
-
         <button class="btn-gray" onclick="clearDisplay()">CE</button>
         <button class="btn-gray" onclick="allClear()">C</button>
         <button class="btn-gray" onclick="deleteNumber()">⌫</button>

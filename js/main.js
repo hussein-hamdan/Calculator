@@ -13,7 +13,12 @@ function toggleScientific() {
 function appendNumber(number) {
   if (number === "." && currentOperand.includes(".")) return;
 
-  if (currentOperand === "0" && number !== ".") {
+  if (
+    currentOperand === "0" &&
+    number !== "." &&
+    number !== "(" &&
+    number !== ")"
+  ) {
     currentOperand = number.toString();
   } else {
     currentOperand = currentOperand.toString() + number.toString();
@@ -41,13 +46,67 @@ function chooseOperation(op) {
   currentOperand = "";
   updateDisplay();
 }
+// دالة العمليات العلمية الفورية
+function scientificCommand(command) {
+  let val = parseFloat(currentOperand);
+  if (isNaN(val) && command !== "pi") return;
 
+  switch (command) {
+    case "sin":
+      // التحويل من درجات إلى راديان
+      currentOperand = Math.sin((val * Math.PI) / 180).toFixed(8);
+      break;
+    case "cos":
+      currentOperand = Math.cos((val * Math.PI) / 180).toFixed(8);
+      break;
+    case "tan":
+      currentOperand = Math.tan((val * Math.PI) / 180).toFixed(8);
+      break;
+    case "sqrt":
+      currentOperand = Math.sqrt(val).toString();
+      break;
+    case "log":
+      currentOperand = Math.log10(val).toString();
+      break;
+    case "exp":
+      currentOperand = Math.exp(val).toString();
+      break;
+    case "pow2":
+      currentOperand = Math.pow(val, 2).toString();
+      break;
+    case "log10":
+      currentOperand = Math.pow(10, val).toString();
+      break;
+    case "pi":
+      currentOperand = Math.PI.toFixed(8).toString();
+      break;
+    case "fact":
+      currentOperand = factorial(val).toString();
+      break;
+  }
+  // تنظيف الأصفار الزائدة الناتجة عن toFixed
+  currentOperand = parseFloat(currentOperand).toString();
+  updateDisplay();
+}
+
+function factorial(n) {
+  if (n < 0) return "Error";
+  if (n === 0 || n === 1) return 1;
+  let result = 1;
+  for (let i = n; i > 1; i--) result *= i;
+  return result;
+}
 function compute() {
   if (currentOperand === "" && fullExpression === "") return;
   let finalExpression = fullExpression + currentOperand;
   try {
-    let result = new Function("return " + finalExpression)();
-    currentOperand = result.toString();
+    let result = eval(finalExpression);
+    // let result = new Function("return " + finalExpression)();
+    if (!isFinite(result)) {
+      currentOperand = "Error";
+    } else {
+      currentOperand = result.toString();
+    }
     fullExpression = "";
     operation = undefined;
   } catch (error) {
@@ -60,6 +119,8 @@ function compute() {
 function updateDisplay() {
   currentTextElement.innerText = currentOperand;
   previousTextElement.innerText = fullExpression
+    .replace(/\*\*/g, "^")
+    .replace(/%/g, " Mod ")
     .replace(/\*/g, "×")
     .replace(/\//g, "÷");
 }
